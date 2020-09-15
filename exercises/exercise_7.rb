@@ -11,18 +11,8 @@ puts "----------"
 
 # Your code goes here ...
 
-
-
-class Employee < ActiveRecord::Base
-  validates :name, :last_name, presence: true
-  validates :hourly_rate, numericality: { only_integer: true , greater_than_or_equal_to: 40, less_than_or_equal_to: 200 }
-  validates :store, presence: true
-end
-
-class Store < ActiveRecord::Base
-  validates :name, presence: true, length: {minimum: 3}
-  validates :annual_revenue, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-end
-# Ask the user for a store name (store it in a variable)
-# Attempt to create a store with the inputted name but leave out the other fields (annual_revenue, mens_apparel, and womens_apparel)
-# Display the error messages provided back from ActiveRecord to the user (one on each line) after you attempt to save/create the record
+puts "Please, enter a store name"
+store_name = $stdin.gets.chomp
+store = Store.create(name: store_name)
+store.valid?
+puts store.errors.full_messages
